@@ -64,6 +64,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## $2\times 2$ cross-over design 
 
+## Temporary
+
 
 
 
