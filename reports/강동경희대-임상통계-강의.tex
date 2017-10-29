@@ -1,0 +1,202 @@
+\documentclass[9pt,ignorenonframetext,xcolor=dvipsnames]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usetheme[]{metropolis}
+\usefonttheme{serif}
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\newif\ifbibliography
+\hypersetup{
+            pdftitle={임상연구 설계와 분석을 위한 통계 방법},
+            pdfauthor={, Ph.D., Senior researcher},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+\usepackage{kotex}
+\usepackage{placeins}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{float}
+% \usepackage{setspace}\doublespacing
+\usepackage{relsize}
+\usepackage{bigints}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{dcolumn}
+\usepackage{array}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage{gensymb}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{pgf}
+\usepackage{textpos}
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\
+\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\
+\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\
+\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{P}[1]{>{\raggedright\tabularxbackslash}p{#1}}
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{0.1cm}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  % \includegraphics[width = \paperwidth, height = 0.5cm]{KIOM-BAR.png}
+  % \vskip-10pt
+  \hbox{%
+  \begin{beamercolorbox}[wd=0.3\paperwidth,ht=3ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}{Boncho Ku}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=0.4\paperwidth,ht=3ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}{임상연구 설계와 분석을 위한 통계 방법}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=3ex,dp=1ex,center]{date in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\title{임상연구 설계와 분석을 위한 통계 방법}
+\author{\textbf{Boncho Ku}, Ph.D., Senior researcher}
+\institute{KM Fundamental Research Division, Korea Institute of Oriental Medicine}
+\date{\(16^{\mathrm{th}}\) November, 2017}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introduction}\label{introduction}
+
+\section{Type of Studies}\label{type-of-studies}
+
+\begin{frame}{Overview}
+
+\LARGE{Study or trial?}
+
+\end{frame}
+
+\begin{frame}{Observational Study}
+
+\begin{block}{Cross-sectional study (단면적 관찰연구)}
+
+\end{block}
+
+\begin{block}{Longitudinal study (종단적 관찰연구)}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Experimental Study}
+
+\begin{block}{Randomized controlled trial}
+
+\end{block}
+
+\begin{block}{Pilot study}
+
+\end{block}
+
+\begin{block}{Exploratory study}
+
+\end{block}
+
+\begin{block}{Confirmative study}
+
+\end{block}
+
+\end{frame}
+
+\section{Type of outcome variables}\label{type-of-outcome-variables}
+
+\begin{frame}{Primary outcomes}
+
+\end{frame}
+
+\begin{frame}{Secondary outcomes}
+
+\end{frame}
+
+\begin{frame}{Temporary}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,69 @@
+---
+title: 임상연구 설계와 분석을 위한 통계 방법
+# subtitle: Penalized Regression Approach for Multivariate Analysis of Spectroscopy Data
+author: \textbf{Boncho Ku}, Ph.D., Senior researcher
+institute: KM Fundamental Research Division, Korea Institute of Oriental Medicine
+date: $16^{\mathrm{th}}$ November, 2017
+output: 
+  beamer_presentation: 
+    fonttheme: serif
+    includes:
+      in_header: presentation-header-01.tex
+      incremental: no
+    keep_tex: yes
+    slide_level: 2
+    theme: metropolis
+    toc: yes
+classoption: xcolor=dvipsnames
+fontsize: 9pt
+geometry: paperwidth=26cm, paperheight=19cm, textwidth=195mm, textheight=140mm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introduction
+
+# Type of Studies
+
+## Overview 
+
+\LARGE{Study or trial?}
+
+## Observational Study
+
+### Cross-sectional study (단면적 관찰연구)
+
+### Longitudinal study (종단적 관찰연구)
+
+## Experimental Study
+
+### Randomized controlled trial 
+
+### Pilot study
+
+### Exploratory study
+
+### Confirmative study
+
+
+# Type of outcome variables
+
+## Primary outcomes
+
+## Secondary outcomes
+
+## Surrogate variables
+
+## Global assessment variable
+
+# Sample size calculation
+
+## Parallel design
+
+## $2\times 2$ cross-over design 
+
+
+
+

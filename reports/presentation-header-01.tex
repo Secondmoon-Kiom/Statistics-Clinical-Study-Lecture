@@ -1,0 +1,66 @@
+\usepackage{kotex}
+\usepackage{placeins}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{float}
+% \usepackage{setspace}\doublespacing
+\usepackage{relsize}
+\usepackage{bigints}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{dcolumn}
+\usepackage{array}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage{gensymb}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{pgf}
+\usepackage{textpos}
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\
+\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\
+\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\
+\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{P}[1]{>{\raggedright\tabularxbackslash}p{#1}}
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{0.1cm}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  % \includegraphics[width = \paperwidth, height = 0.5cm]{KIOM-BAR.png}
+  % \vskip-10pt
+  \hbox{%
+  \begin{beamercolorbox}[wd=0.3\paperwidth,ht=3ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}{Boncho Ku}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=0.4\paperwidth,ht=3ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}{임상연구 설계와 분석을 위한 통계 방법}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=3ex,dp=1ex,center]{date in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
