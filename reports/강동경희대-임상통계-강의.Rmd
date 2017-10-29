@@ -35,6 +35,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ### Cross-sectional study (단면적 관찰연구)
 
+1. prevalence study
+2. Diagostic test 
+3. Ecological study 
+4. Validity, Reliability, and agreement study
+
 ### Longitudinal study (종단적 관찰연구)
 
 ## Experimental Study
@@ -64,7 +69,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## $2\times 2$ cross-over design 
 
-## Temporary
+## Factorial design
 
 
 
