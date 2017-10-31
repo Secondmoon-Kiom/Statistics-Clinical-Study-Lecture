@@ -18,6 +18,7 @@
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{pgf}
+\usepackage{pgfpages}
 \usepackage{textpos}
 
 \renewcommand\theadalign{cb}
@@ -46,6 +47,10 @@
 \addtolength{\wideitemsep}{0.1cm}
 \let\olditem\item
 \renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+% \setbeameroption{show notes on second screen=bottom}
+\setbeameroption{show notes}
+\setbeamertemplate{note page}[plain]
 
 \setbeamertemplate{footline}
 {

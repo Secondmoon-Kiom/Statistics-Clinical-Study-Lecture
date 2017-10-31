@@ -25,22 +25,47 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introduction
 
+## 임상연구 설계
+
+## Statistics
+
+Statistics makes us very very uncomfortable...
+
+Ironically, statistics gives us very very useful information!!
+
+So What is statistics??
+
+
+
 # Type of Studies
 
 ## Overview 
 
 \LARGE{Study or trial?}
 
+## Overview
+
+### Study
+
+자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험
+
+### Trial
+
+자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험
+
 ## Observational Study
 
 ### Cross-sectional study (단면적 관찰연구)
 
 1. prevalence study
-2. Diagostic test 
+2. Diagostic test
 3. Ecological study 
 4. Validity, Reliability, and agreement study
 
 ### Longitudinal study (종단적 관찰연구)
+
+1. Prospective study
+2. Retrospective study
 
 ## Experimental Study
 
@@ -65,11 +90,71 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Sample size calculation
 
+## Overview
+
+### Two approaches
+
+1. Based on the marginal error rate $\rightarrow$ population based observational study
+2. Based on the effectiveness between concerning groups $\rightarrow$ experimental study
+  
+\textbf{Both approaches are based on previous studies}
+
+\textbf{Is your study entirely new?}
+
+## Observational study
+
+## Observational study: prevalence study
+
+## Observational study: prevalence study
+
 ## Parallel design
 
 ## $2\times 2$ cross-over design 
 
 ## Factorial design
+
+# Multiple comparison
+
+## What makes data significant?
+
+1. Data themselves contain unexpected errors
+2. Bias
+3. Just conincidence
+4. Our hypothesis is working
+
+## Torturing data
+
+# Statistical Analysis 
+
+## Overview
+
+## Independent two sample t-test
+
+1. Too easy, but very useful methodology for the comparison of sample means between two groups
+
+## Analysis of Variance (ANOVA)
+
+## Analysis of Covariance (ANCOVA)
+
+## Simple or multiple regression
+
+## Repeated Measures ANOVA
+
+## Linear mixed effects model 
+
+## Reliability analysis 
+
+### Cohen's $\kappa$
+
+### Cronbach's $\alpha$
+
+### Intra Class Correlation (ICC)
+
+
+
+
+
+
 
 
 

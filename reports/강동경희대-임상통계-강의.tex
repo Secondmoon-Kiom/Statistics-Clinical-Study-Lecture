@@ -84,6 +84,7 @@
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{pgf}
+\usepackage{pgfpages}
 \usepackage{textpos}
 
 \renewcommand\theadalign{cb}
@@ -112,6 +113,10 @@
 \addtolength{\wideitemsep}{0.1cm}
 \let\olditem\item
 \renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+% \setbeameroption{show notes on second screen=bottom}
+\setbeameroption{show notes}
+\setbeamertemplate{note page}[plain]
 
 \setbeamertemplate{footline}
 {
@@ -145,11 +150,41 @@
 
 \section{Introduction}\label{introduction}
 
+\begin{frame}{임상연구 설계}
+
+\end{frame}
+
+\begin{frame}{Statistics}
+
+Statistics makes us very very uncomfortable\ldots{}
+
+Ironically, statistics gives us very very useful information!!
+
+So What is statistics??
+
+\end{frame}
+
 \section{Type of Studies}\label{type-of-studies}
 
 \begin{frame}{Overview}
 
 \LARGE{Study or trial?}
+
+\end{frame}
+
+\begin{frame}{Overview}
+
+\begin{block}{Study}
+
+자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험
+
+\end{block}
+
+\begin{block}{Trial}
+
+자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험
+
+\end{block}
 
 \end{frame}
 
@@ -173,6 +208,15 @@
 \end{block}
 
 \begin{block}{Longitudinal study (종단적 관찰연구)}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prospective study
+\item
+  Retrospective study
+\end{enumerate}
 
 \end{block}
 
@@ -218,6 +262,41 @@
 
 \section{Sample size calculation}\label{sample-size-calculation}
 
+\begin{frame}{Overview}
+
+\begin{block}{Two approaches}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Based on the marginal error rate \(\rightarrow\) population based
+  observational study
+\item
+  Based on the effectiveness between concerning groups \(\rightarrow\)
+  experimental study
+\end{enumerate}
+
+\textbf{Both approaches are based on previous studies}
+
+\textbf{Is your study entirely new?}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Observational study}
+
+\end{frame}
+
+\begin{frame}{Observational study: prevalence study}
+
+\end{frame}
+
+\begin{frame}{Observational study: prevalence study}
+
+\end{frame}
+
 \begin{frame}{Parallel design}
 
 \end{frame}
@@ -227,6 +306,83 @@
 \end{frame}
 
 \begin{frame}{Factorial design}
+
+\end{frame}
+
+\section{Multiple comparison}\label{multiple-comparison}
+
+\begin{frame}{What makes data significant?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Data themselves contain unexpected errors
+\item
+  Bias
+\item
+  Just conincidence
+\item
+  Our hypothesis is working
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Torturing data}
+
+\end{frame}
+
+\section{Statistical Analysis}\label{statistical-analysis}
+
+\begin{frame}{Overview}
+
+\end{frame}
+
+\begin{frame}{Independent two sample t-test}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Too easy, but very useful methodology for the comparison of sample
+  means between two groups
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Analysis of Variance (ANOVA)}
+
+\end{frame}
+
+\begin{frame}{Analysis of Covariance (ANCOVA)}
+
+\end{frame}
+
+\begin{frame}{Simple or multiple regression}
+
+\end{frame}
+
+\begin{frame}{Repeated Measures ANOVA}
+
+\end{frame}
+
+\begin{frame}{Linear mixed effects model}
+
+\end{frame}
+
+\begin{frame}{Reliability analysis}
+
+\begin{block}{Cohen's \(\kappa\)}
+
+\end{block}
+
+\begin{block}{Cronbach's \(\alpha\)}
+
+\end{block}
+
+\begin{block}{Intra Class Correlation (ICC)}
+
+\end{block}
 
 \end{frame}
 
