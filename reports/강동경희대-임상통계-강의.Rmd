@@ -13,28 +13,58 @@ output:
     keep_tex: yes
     slide_level: 2
     theme: metropolis
-    toc: yes
+    toc: no
+urlcolor: blue
 classoption: xcolor=dvipsnames
 fontsize: 9pt
-geometry: paperwidth=26cm, paperheight=19cm, textwidth=195mm, textheight=140mm
+geometry: paperwidth=297mm, paperheight=210mm, textwidth=247mm, textheight=154.6mm
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# Introduction
+# Chapter I: \LARGE{Overview of Statistics}
 
-## 임상연구 설계
+## What is Statistics?
 
-## Statistics
+\LARGE{\textbf{Most researchers or people think}}
 
-Statistics makes us very very uncomfortable...
+\large{Statistics makes us insane...}
 
-Ironically, statistics gives us very very useful information!!
+\LARGE{\textbf{However}}
 
-So What is statistics??
+\large{Statistics sometimes gives us very useful information from data!!}
 
+\large{So then, what is statistics??}
+\vspace{0.5cm}
+\begin{columns}
+  \begin{column}{0.4\textwidth}
+    \begin{center}
+      \includegraphics[width = 2.5cm, height = 2.5cm]{StatisticsWords_Meg.jpg}
+    \end{center}
+  \end{column}
+  \begin{column}{0.6\textwidth}
+    \begin{center}
+      \includegraphics[width = 4.8cm, height = 2.5cm]{wordcloud-biostatics.png}
+    \end{center}
+  \end{column}
+\end{columns}
+
+\tiny{$^{\dagger}$ Each wordcloud was cited from \href{http://blog.trident.edu/-temporary-slug-8756cc7e-1d1b-458e-94e2-3ff603f80c9e}{Trident University International} and \href{http://www.augusta.edu/mcg/dphs/biostats/research/index.php}{Augusta University}, respectively.}
+
+## Main Pillars of Statistics 
+\LARGE
+
+1. Data 
+    - Investigation, experiment, and survey
+    - Gathering numbers (for quantitative analysis)
+2. Description or Summarization
+    - Table, chart, and so on
+    - Based on summarized statistics (e.g. mean, standard deviation, median, ...)
+3. Inference
+    - Numerous statistical tests and models based on probability theory
+    - e.g. two-sample t-test, ANOVA, ANCOVA, regression, and so on
 
 
 # Type of Studies

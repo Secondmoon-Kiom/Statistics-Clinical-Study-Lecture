@@ -51,6 +51,37 @@
 % \setbeameroption{show notes on second screen=bottom}
 \setbeameroption{show notes}
 \setbeamertemplate{note page}[plain]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}[default]
+
+
+% \setbeamertemplate{headline}{%
+% \leavevmode%
+  % \hbox{%
+    % \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.125ex, right]{palette quaternary}%
+    % \usebeamercolor[fg]{navigation symbols}\insertslidenavigationsymbol%
+		% \insertframenavigationsymbol%
+		% \insertsubsectionnavigationsymbol%
+		% \insertsectionnavigationsymbol%
+		% \insertdocnavigationsymbol%
+		% \insertbackfindforwardnavigationsymbol%
+    % \end{beamercolorbox}%
+  % }
+% }
+
+\addtobeamertemplate{frametitle}{}{
+\leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.125ex, right]{palette quaternary}%
+    \usebeamercolor[fg]{navigation symbols}\insertslidenavigationsymbol%
+		\insertframenavigationsymbol%
+		\insertsubsectionnavigationsymbol%
+		\insertsectionnavigationsymbol%
+		\insertdocnavigationsymbol%
+		\insertbackfindforwardnavigationsymbol%
+    \end{beamercolorbox}%
+  }
+}
 
 \setbeamertemplate{footline}
 {
@@ -61,11 +92,11 @@
   \begin{beamercolorbox}[wd=0.3\paperwidth,ht=3ex,dp=1ex,center]{author in head/foot}%
     \usebeamerfont{author in head/foot}{Boncho Ku}
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=0.4\paperwidth,ht=3ex,dp=1ex,center]{title in head/foot}%
+  \begin{beamercolorbox}[wd=0.3\paperwidth,ht=3ex,dp=1ex,center]{title in head/foot}%
     \usebeamerfont{title in head/foot}{임상연구 설계와 분석을 위한 통계 방법}
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.3\paperwidth,ht=3ex,dp=1ex,center]{date in head/foot}%
-    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=3ex,dp=1ex,center]{date in head/foot}%
+    secondmoon@kiom.re.kr\hspace{0.5cm}\insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
   \end{beamercolorbox}}%
   \vskip0pt%
 }
