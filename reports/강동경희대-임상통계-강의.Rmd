@@ -56,7 +56,10 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Main Pillars of Statistics 
 \LARGE
 
-1. Data 
+### The most important things in statistics 
+\normalsize
+
+1. Data (sample)
     - Investigation, experiment, and survey
     - Gathering numbers (for quantitative analysis)
 2. Description or Summarization
@@ -66,22 +69,39 @@ knitr::opts_chunk$set(echo = FALSE)
     - Numerous statistical tests and models based on probability theory
     - e.g. two-sample t-test, ANOVA, ANCOVA, regression, and so on
 
+## Why should we collect data (sample)? 
+
+### Measure everything in everywhere
+
+- Advantages
+    - You will get exactly correct answer
+    - No need to meet an awkward statistician LIKE ME
+
+- Disadvantages 
+    - Typing ``SHOW ME THE MONEY'' may help your budget
+    - Time is TOO SHORT TO COLLECT everything
+
+### Inferential approach
+
+  - If we have a proper sample that represents the whole population, you can get NEARLY the correct answer
+
+## Type of variables 
+
+1. 명목척도(norminal): 성별, 혈액형, 지역, 인종 
 
 # Type of Studies
 
 ## Overview 
 
-\LARGE{Study or trial?}
+\LARGE{\textbf{Research or trial?}}
 
-## Overview
+### Research
 
-### Study
-
-자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험
+\normalsize{자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험}
 
 ### Trial
 
-자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험
+\normalsize{자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험}
 
 ## Observational Study
 
