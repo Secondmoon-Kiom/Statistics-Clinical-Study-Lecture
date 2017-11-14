@@ -26,17 +26,26 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Chapter I: \LARGE{Overview of Statistics}
 
+## Famous quotes about statistics
+
+\textit{There are three types of lies: lies, damn lies, and \textbf{STATISTICS}} (Benjamin Disraeli)
+
+\textit{Fact are stubborn things, but \textbf{STATISTICS} are pliable} (Mark Twain)
+
+and so on ...
+
+Huge number of quotes about statistics commented it in sarcastic tone
+
+$\rightarrow$ mostly hard to refute
+
+### However ...
+
+\large{Statistics itself always provides useful information and allows us to maintain objective perspective based on DATA}
+
 ## What is Statistics?
 
-\LARGE{\textbf{Most researchers or people think}}
-
-\large{Statistics makes us insane...}
-
-\LARGE{\textbf{However}}
-
-\large{Statistics sometimes gives us very useful information from data!!}
-
 \large{So then, what is statistics??}
+
 \vspace{0.5cm}
 \begin{columns}
   \begin{column}{0.4\textwidth}
@@ -52,6 +61,15 @@ knitr::opts_chunk$set(echo = FALSE)
 \end{columns}
 
 \tiny{$^{\dagger}$ Each wordcloud was cited from \href{http://blog.trident.edu/-temporary-slug-8756cc7e-1d1b-458e-94e2-3ff603f80c9e}{Trident University International} and \href{http://www.augusta.edu/mcg/dphs/biostats/research/index.php}{Augusta University}, respectively.}
+
+\vspace{0.3cm}
+\normalsize
+
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Statistics}]
+Concerning with \textbf{collection}, \textbf{organization}, \textbf{summarization} and \textbf{analysis} of \textbf{DATA}
+\end{tcolorbox}
+<!--   -->
+
 
 ## Main Pillars of Statistics 
 \LARGE
@@ -71,23 +89,31 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Why should we collect data (sample)? 
 
-### Measure everything in everywhere
+### Measure everything from POPULATION
 
-- Advantages
+- Benefits
     - You will get exactly correct answer
     - No need to meet an awkward statistician LIKE ME
 
-- Disadvantages 
-    - Typing ``SHOW ME THE MONEY'' may help your budget
-    - Time is TOO SHORT TO COLLECT everything
+- If you had a plenty of 
+    - Money (typing ``SHOW ME THE MONEY'' may help your budget)
+    - Time (TOO SHORT TO COLLECT data of entire population)
 
-### Inferential approach
+### Inferential approach based on SAMPLE
 
   - If we have a proper sample that represents the whole population, you can get NEARLY the correct answer
+  - Estimation and hypothesis testing
 
 ## Type of variables 
 
-1. 명목척도(norminal): 성별, 혈액형, 지역, 인종 
+\textbf{Data consist of a set of independent sample and measured variables}
+
+\textbf{\textit{Measurement is ubiquitous $\rightarrow$ then error is also ubiquitous.}}
+
+1. Nominal (명목척도): sex, marital status, blood type, race, ...
+2. Ordinal scale (순서척도): grade, education level, preference, severity, ...
+3. Interval scale (구간척도): temperature, IQ, ...
+4. Ratio scale (비율척도): height, weight, BMI, blood pressure, ...
 
 # Type of Studies
 
