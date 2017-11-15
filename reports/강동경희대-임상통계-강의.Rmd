@@ -348,7 +348,7 @@ Statistical inference provides us more reasonable interpretation regarding to th
 
 ## Meaning of 95\% confidence interval 
 
-```{r  message = F, fig.pos = "H", fig.width = 10, fig.height = 5, out.width = "10cm", out.height = "5cm", dpi = 250, fig.align = "center", fig.cap = "95\\% confidence intervals for 100 independent drawn samples with $n = 100$."}
+```{r sim-95CI, message = F, fig.pos = "H", fig.width = 10, fig.height = 5, out.width = "10cm", out.height = "5cm", dpi = 250, fig.align = "center", fig.cap = "95\\% confidence intervals for 100 independent drawn samples with $n = 100$."}
 smpl_mean_sample_ci <- function(n, p=0.95, pop_mean=0, pop_sd=1) {
   smpl <- rnorm(n, pop_mean, pop_sd)
   smpl_sd <- sd(smpl)
