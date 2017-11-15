@@ -81,7 +81,7 @@
 \usepackage{booktabs}
 \usepackage{dcolumn}
 \usepackage{array}
-\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage{gensymb}
 \usepackage{makecell}
 \usepackage{graphicx}
@@ -114,6 +114,9 @@
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
+\setlength\abovecaptionskip{0pt}
+\setlength\belowcaptionskip{-5pt}
+  
 \newlength{\wideitemsep}
 \setlength{\wideitemsep}{\itemsep}
 \addtolength{\wideitemsep}{0.1cm}
@@ -186,23 +189,31 @@
 
 \begin{frame}{Famous quotes about statistics}
 
-\textit{There are three types of lies: lies, damn lies, and \textbf{STATISTICS}}
-(Benjamin Disraeli)
+\begin{mdframed}[backgroundcolor = gray!30]
 
-\textit{Fact are stubborn things, but \textbf{STATISTICS} are pliable}
-(Mark Twain)
+\textit{There are three types of lies: lies, damn lies, and \textbf{STATISTICS}} (Benjamin Disraeli)
 
-and so on \ldots{}
+\textit{Fact are stubborn things, but \textbf{STATISTICS} are pliable} (Mark Twain)
+
+and so on ...
+
+\end{mdframed}
 
 Huge number of quotes about statistics commented it in sarcastic tone
 
 \(\rightarrow\) mostly hard to refute
 
-\begin{block}{However \ldots{}}
+\end{frame}
 
-\large{Statistics itself always provides useful information and allows us to maintain objective perspective based on DATA}
+\begin{frame}{Really?}
 
-\end{block}
+\LARGE
+\textbf{However ...}
+
+\vspace{0.5cm}
+
+Statistics itself always provides useful information and allows us to
+maintain objective perspective based on DATA
 
 \end{frame}
 
@@ -328,29 +339,252 @@ Concerning with \textbf{collection}, \textbf{organization}, \textbf{summarizatio
 
 \end{frame}
 
+\begin{frame}{Parameter vs.~Estimates}
+
+\begin{block}{Parameter}
+
+Parameters exist somewhere in the universe \(\rightarrow\) the true
+value representing the target population
+
+From the view of \textit{frequentist},
+
+\begin{itemize}
+\tightlist
+\item
+  Parameters are fixed \(\rightarrow\) never changing
+\item
+  Parameters exists but we never know the true value of them
+\item
+  But we can ``guess'' them from sample
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Parameter vs.~Estimates}
+
+\begin{block}{Estimates}
+
+\begin{itemize}
+\tightlist
+\item
+  Estimating parameters based on the given samples (data)
+\item
+  Estimates have a variation in accordance with different samples or
+  data
+\end{itemize}
+
+\begin{mdframed}[backgroundcolor = gray!30]
+
+The data is an aspect of the real world we have captured
+
+\end{mdframed}
+
+\begin{itemize}
+\tightlist
+\item
+  How good is our estimation?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Estimation inevitably involves \textbf{ERROR}
+  \item
+    Error measures: standard error (SE) \(\rightarrow\) reliability of
+    an estimate
+  \end{itemize}
+\end{itemize}
+
+\[
+  \mathrm{SE} = \frac{\sigma}{\sqrt{N}}
+\]
+
+\begin{mdframed}[backgroundcolor = gray!30]
+\textbf{\textit{Measurement is ubiquitous $\rightarrow$ then error is also ubiquitous.}}
+\end{mdframed}
+
+\end{block}
+
+\end{frame}
+
 \begin{frame}{Type of variables}
 
 \textbf{Data consist of a set of independent sample and measured variables}
 
-\textbf{\textit{Measurement is ubiquitous $\rightarrow$ then error is also ubiquitous.}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Nominal (명목척도): sex, marital status, blood type, race, \ldots{}
-\item
-  Ordinal scale (순서척도): grade, education level, preference,
-  severity, \ldots{}
-\item
-  Interval scale (구간척도): temperature, IQ, \ldots{}
-\item
-  Ratio scale (비율척도): height, weight, BMI, blood pressure, \ldots{}
-\end{enumerate}
+\begin{table}
+  \centering
+  \caption{Types of variable based on their scales}
+  \begingroup\footnotesize
+  \begin{tabular}{lp{12em}p{8em}}
+    \toprule
+  \textbf{Scale}  &  \textbf{Example}                                                & \textbf{Operation} \\
+    \midrule 
+  \multicolumn{3}{L{5cm}}{\textbf{Qualitative (질적변수)}} \\
+  \hspace{2.5mm} Nominal (명목)  & sex, marital status, blood type, race, eye colour, religion, ... & counting          \\ 
+  \hspace{2.5mm} Ordinal (순서)  & grade, education level, preference, severity, ...                & counting, ranking \\
+  \multicolumn{3}{L{5cm}}{\textbf{Quantitative (양적변수)}} \\
+  \hspace{2.5mm} Interval (구간) & temperature, IQ, SAT score, ...                                  & counting, ranking, $+$, $-$ \\
+  \hspace{2.5mm} Ratio (비율)    & distance, length, height, weight, BMI, blood pressure, ...       & counting, ranking, $+$, $-$, $\times$, $\div$ \\
+  \bottomrule
+  \end{tabular}
+  \endgroup
+\end{table}
 
 \end{frame}
 
-\section{Type of Studies}\label{type-of-studies}
+\begin{frame}{Can we separate types of variable clearly?}
+
+Continuous variable is limited by the precision of the measurement
+
+\begin{block}{Example}
+
+\begin{itemize}
+\tightlist
+\item
+  Height: measured to the nearest centimeter \(\rightarrow\) continuous
+  variable?
+\item
+  Age: measured to the year but theoretically, measured to any level of
+  precision (e.g.~month, day, and time)
+\end{itemize}
+
+\begin{mdframed}[backgroundcolor = gray!30]
+In practice, all variables are discrete but some variables can be treated as continuous when its distribution can be well approximated by a continuous distribution.
+\end{mdframed}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{How to express your data?}
+
+\begin{mdframed}[backgroundcolor = gray!30]
+Data themselves are just a bunch of numbers $\rightarrow$ how to extract meaningful information from data?
+\end{mdframed}
+
+\begin{block}{Descriptive statistics}
+
+\begin{itemize}
+\tightlist
+\item
+  Summary statistics: all information of data are represented by a
+  certain type of numbers
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Example: mean, median, proportion, standard deviation, interquartile
+    range, percentile, \ldots{} \(\rightarrow\) developing
+    ``\textit{statphobia}''
+  \end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Descriptive statistics of ``mpg'' dataset} 
+\label{tab:demo-1}
+\begingroup\footnotesize
+\begin{tabular}{lrrrrrrrrr}
+ \textbf{Variable} & $\mathbf{n}$ & \textbf{Min} & $\mathbf{q_1}$ & $\mathbf{\widetilde{x}}$ & $\mathbf{\bar{x}}$ & $\mathbf{q_3}$ & \textbf{Max} & $\mathbf{s}$ & \textbf{IQR} \\ 
+  \hline
+displ & 234 &    1.6 &    2.4 &    3.3 &    3.5 &    4.6 &    7 & 1.3 & 2.2 \\ 
+  year & 234 & 1999.0 & 1999.0 & 2003.5 & 2003.5 & 2008.0 & 2008 & 4.5 & 9.0 \\ 
+  cyl & 234 &    4.0 &    4.0 &    6.0 &    5.9 &    8.0 &    8 & 1.6 & 4.0 \\ 
+  cty & 234 &    9.0 &   14.0 &   17.0 &   16.9 &   19.0 &   35 & 4.3 & 5.0 \\ 
+  hwy & 234 &   12.0 &   18.0 &   24.0 &   23.4 &   27.0 &   44 & 6.0 & 9.0 \\ 
+  \end{tabular}
+\endgroup
+\end{table}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{How to express your data?}
+
+\begin{block}{Example of polar area diagram by Florence Nightingale
+(1820 \(\sim\) 1910)}
+
+\begin{center}
+  \includegraphics[width = 10cm, height = 6cm]{Nightingale-mortality.jpg}
+\end{center}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{How to express your data?}
+
+\begin{block}{Example of data visualization}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=8cm,height=6cm]{Figures/mpg-example-1} 
+
+}
+
+\caption{Data visualization examples for ``mpg'' dataset. All plots are available at http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html}\label{fig:mpg-example}
+\end{figure}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{How to express your data?}
+
+\begin{block}{Data visualization}
+
+\begin{mdframed}[backgroundcolor = gray!30]
+Sometimes, a graph provides us more useful information than complex tables
+\end{mdframed}
+
+\end{block}
+
+\begin{block}{Various types of statistical graphs}
+
+\begin{itemize}
+\tightlist
+\item
+  Histogram, boxplot, Q-Q plot, scatterplot, \ldots{}
+\item
+  Do NOT rely only on NUMBERS, Do draw a PLOT!!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Is description of data fully enough?}
+
+Again, data are the small aspect of the real world.
+
+Statistical inference provides us more reasonable interpretation
+regarding to the uncertainty of data.
+
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Two main category of statistical inference}]
+\begin{itemize}
+  \item \textbf{Estimation}
+  \item \textbf{Hypothesis testing}
+\end{itemize}
+\end{tcolorbox}
+
+\end{frame}
+
+\begin{frame}{Meaning of 95\% confidence interval}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=10cm,height=5cm]{Figures/unnamed-chunk-1-1} 
+
+}
+
+\caption{95\% confidence intervals for 100 independent drawn samples with $n = 100$.}\label{fig:unnamed-chunk-1}
+\end{figure}
+
+\end{frame}
+
+\section{Clinical Research}\label{clinical-research}
 
 \begin{frame}{Overview}
 

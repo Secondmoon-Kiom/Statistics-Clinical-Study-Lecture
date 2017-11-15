@@ -8,7 +8,7 @@ output:
   beamer_presentation: 
     fonttheme: serif
     includes:
-      in_header: presentation-header-01.tex
+      in_header: presentation-header-new.tex
       incremental: no
     keep_tex: yes
     slide_level: 2
@@ -24,9 +24,69 @@ geometry: paperwidth=297mm, paperheight=210mm, textwidth=247mm, textheight=154.6
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{r knitr_init, echo=FALSE, results="hide", message=FALSE, cache=FALSE}
+knitr::opts_knit$set(root.dir = '..')
+options(max.print = 10000)
+knitr::opts_chunk$set(eval = TRUE,
+                      echo = FALSE,
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      tidy=TRUE,
+                      message=FALSE,
+                      warning=FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = TRUE,
+                      fig.path="Figures/",  # Set the figure options
+                      fig.align = "center",
+                      fig.width = 7,
+                      fig.height = 7,
+                      fig.keep='all', fig.retina=2)
+```
+
+```{r Initialization, echo = F, results = "hide", message = F, cache = F}
+rm(list = ls())
+library(MASS)
+library(reshape2)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(stringr)
+library(lubridate)
+library(ChemoSpec)
+library(prospectr)
+library(inspectr)
+library(pls)
+library(rmarkdown)
+library(knitr)
+library(moonBook)
+library(ztable)
+library(htmlTable)
+library(ggthemes)
+library(grid)
+library(gridExtra)
+library(latex2exp)
+library(nlme)
+library(lsmeans)
+library(car)
+library(multcomp)
+library(xtable)
+library(kableExtra)
+library(viridis)
+library(GGally)
+library(RColorBrewer)
+library(Hmisc)
+
+options(knitr.table.format = "latex")
+```
+
 # Chapter I: \LARGE{Overview of Statistics}
 
 ## Famous quotes about statistics
+
+\begin{mdframed}[backgroundcolor = gray!30]
 
 \textit{There are three types of lies: lies, damn lies, and \textbf{STATISTICS}} (Benjamin Disraeli)
 
@@ -34,13 +94,21 @@ knitr::opts_chunk$set(echo = FALSE)
 
 and so on ...
 
+\end{mdframed}
+
+
+
 Huge number of quotes about statistics commented it in sarcastic tone
 
 $\rightarrow$ mostly hard to refute
 
-### However ...
+## Really?
+\LARGE
+\textbf{However ...}
 
-\large{Statistics itself always provides useful information and allows us to maintain objective perspective based on DATA}
+\vspace{0.5cm}
+
+Statistics itself always provides useful information and allows us to maintain objective perspective based on DATA
 
 ## What is Statistics?
 
@@ -104,18 +172,215 @@ Concerning with \textbf{collection}, \textbf{organization}, \textbf{summarizatio
   - If we have a proper sample that represents the whole population, you can get NEARLY the correct answer
   - Estimation and hypothesis testing
 
-## Type of variables 
+## Parameter vs. Estimates
+
+### Parameter
+
+Parameters exist somewhere in the universe $\rightarrow$ the true value representing the target population
+
+From the view of \textit{frequentist}, 
+
+  - Parameters are fixed $\rightarrow$ never changing
+  - Parameters exists but we never know the true value of them
+  - But we can ``guess'' them from sample
+
+## Parameter vs. Estimates
+
+### Estimates
+
+ - Estimating parameters based on the given samples (data)
+ - Estimates have a variation in accordance with different samples or data
+ 
+\begin{mdframed}[backgroundcolor = gray!30]
+
+The data is an aspect of the real world we have captured
+
+\end{mdframed}
+ 
+ - How good is our estimation?
+    - Estimation inevitably involves \textbf{ERROR}
+    - Error measures: standard error (SE) $\rightarrow$ reliability of an estimate
+
+$$
+  \mathrm{SE} = \frac{\sigma}{\sqrt{N}}
+$$
+
+\begin{mdframed}[backgroundcolor = gray!30]
+\textbf{\textit{Measurement is ubiquitous $\rightarrow$ then error is also ubiquitous.}}
+\end{mdframed}
+
+
+## Type of variables
 
 \textbf{Data consist of a set of independent sample and measured variables}
+<!-- \rowcolors{2}{gray!6}{white} -->
+\begin{table}
+  \centering
+  \caption{Types of variable based on their scales}
+  \begingroup\footnotesize
+  \begin{tabular}{lp{12em}p{8em}}
+    \toprule
+  \textbf{Scale}  &  \textbf{Example}                                                & \textbf{Operation} \\
+    \midrule 
+  \multicolumn{3}{L{5cm}}{\textbf{Qualitative (질적변수)}} \\
+  \hspace{2.5mm} Nominal (명목)  & sex, marital status, blood type, race, eye colour, religion, ... & counting          \\ 
+  \hspace{2.5mm} Ordinal (순서)  & grade, education level, preference, severity, ...                & counting, ranking \\
+  \multicolumn{3}{L{5cm}}{\textbf{Quantitative (양적변수)}} \\
+  \hspace{2.5mm} Interval (구간) & temperature, IQ, SAT score, ...                                  & counting, ranking, $+$, $-$ \\
+  \hspace{2.5mm} Ratio (비율)    & distance, length, height, weight, BMI, blood pressure, ...       & counting, ranking, $+$, $-$, $\times$, $\div$ \\
+  \bottomrule
+  \end{tabular}
+  \endgroup
+\end{table}
 
-\textbf{\textit{Measurement is ubiquitous $\rightarrow$ then error is also ubiquitous.}}
+## Can we separate types of variable clearly? 
 
-1. Nominal (명목척도): sex, marital status, blood type, race, ...
-2. Ordinal scale (순서척도): grade, education level, preference, severity, ...
-3. Interval scale (구간척도): temperature, IQ, ...
-4. Ratio scale (비율척도): height, weight, BMI, blood pressure, ...
+Continuous variable is limited by the precision of the measurement
 
-# Type of Studies
+### Example
+
+- Height: measured to the nearest centimeter $\rightarrow$ continuous variable?
+- Age: measured to the year but theoretically, measured to any level of precision (e.g. month, day, and time)
+
+\begin{mdframed}[backgroundcolor = gray!30]
+In practice, all variables are discrete but some variables can be treated as continuous when its distribution can be well approximated by a continuous distribution.
+\end{mdframed}
+
+## How to express your data?
+
+\begin{mdframed}[backgroundcolor = gray!30]
+Data themselves are just a bunch of numbers $\rightarrow$ how to extract meaningful information from data?
+\end{mdframed}
+
+### Descriptive statistics 
+
+- Summary statistics: all information of data are represented by a certain type of numbers
+    - Example: mean, median, proportion, standard deviation, interquartile range, percentile, ... $\rightarrow$ developing ``\textit{statphobia}''
+
+```{r summary-ex1, results = "asis"}
+library(xtable)
+library(reporttools)
+options(xtable.timestamp = "")
+options(xtable.comment = FALSE)
+
+data(mpg)
+df <- data.frame(mpg %>% select(displ, year, cyl, cty, hwy))
+tableContinuous(vars = df, stats = c("n", "min", "q1", "median", "mean", "q3", "max", "s", "iqr"),
+                caption.placement = "top", cap = "Descriptive statistics of ``mpg'' dataset", 
+                lab = "tab:demo-1", longtable = F, table.placement = "H")
+```
+
+## How to express your data?
+
+### Example of polar area diagram by Florence Nightingale (1820 $\sim$ 1910)
+
+\begin{center}
+  \includegraphics[width = 10cm, height = 6cm]{Nightingale-mortality.jpg}
+\end{center}
+
+## How to express your data?
+
+### Example of data visualization
+
+```{r mpg-example, message = F, fig.pos = "H", fig.width = 11, fig.height = 9, out.width = "8cm", out.height = "6cm", dpi = 250,  fig.align = "center", fig.cap = "Data visualization examples for ``mpg'' dataset. All plots are available at http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html"}
+theme_set(theme_classic())
+g <- ggplot(mpg, aes(cty))
+g1 <- g + geom_density(aes(fill=factor(cyl)), alpha=0.8) + 
+     labs(title="Density plot", subtitle="City Mileage Grouped by Number of cylinders",
+          caption="Source: mpg", x="City Mileage", fill="# Cylinders") + 
+  scale_fill_manual(values = c("white", "green", "orange", "red"))
+
+theme_set(theme_bw())
+g <- ggplot(mpg, aes(manufacturer, cty))
+g2 <- g + geom_boxplot() + 
+          geom_dotplot(binaxis='y', stackdir='center', dotsize = .5, fill="red") +
+          theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+          labs(title="Box plot + Dot plot", subtitle="City Mileage vs Class: Each dot represents 1 row in source data",
+               caption="Source: mpg", x="Class of Vehicle", y="City Mileage")
+       
+library(ggplot2)
+theme_set(theme_bw())  # pre-set the bw theme.
+g <- ggplot(mpg, aes(cty, hwy))
+g3 <- g + geom_count(col="tomato3", show.legend=F) +
+  labs(subtitle="mpg: city vs highway mileage", y="hwy", x="cty", title="Counts Plot")
+
+library(ggplot2)
+theme_set(theme_classic())
+freqtable <- table(mpg$manufacturer)
+df <- as.data.frame.table(freqtable)
+
+g <- ggplot(df, aes(Var1, Freq))
+g4 <- g + geom_bar(stat="identity", width = 0.5, fill="tomato2") + 
+  labs(title="Bar Chart", subtitle="Manufacturer of vehicles", 
+       caption="Source: Frequency of Manufacturers from 'mpg' dataset") + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+
+grid.arrange(g1, g2, g3, g4, ncol = 2)
+```
+
+## How to express your data?
+
+### Data visualization
+
+\begin{mdframed}[backgroundcolor = gray!30]
+Sometimes, a graph provides us more useful information than complex tables
+\end{mdframed}
+
+### Various types of statistical graphs
+
+- Histogram, boxplot, Q-Q plot, scatterplot, ...
+- Do NOT rely only on NUMBERS, Do draw a PLOT!!
+
+
+## Is description of data fully enough?
+
+Again, data are the small aspect of the real world. 
+
+Statistical inference provides us more reasonable interpretation regarding to the uncertainty of data.
+
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Two main category of statistical inference}]
+\begin{itemize}
+  \item \textbf{Estimation}
+  \item \textbf{Hypothesis testing}
+\end{itemize}
+\end{tcolorbox}
+
+
+## Meaning of 95\% confidence interval 
+
+```{r  message = F, fig.pos = "H", fig.width = 10, fig.height = 5, out.width = "10cm", out.height = "5cm", dpi = 250, fig.align = "center", fig.cap = "95\\% confidence intervals for 100 independent drawn samples with $n = 100$."}
+smpl_mean_sample_ci <- function(n, p=0.95, pop_mean=0, pop_sd=1) {
+  smpl <- rnorm(n, pop_mean, pop_sd)
+  smpl_sd <- sd(smpl)
+  smpl_mean <- mean(smpl)
+  tailprob <- (1 - p) / 2
+  q <- -qt(tailprob, df=(n - 1), lower.tail=TRUE)
+  se <- smpl_sd / sqrt(n)
+  ci <- data.frame(ci_lb = smpl_mean - q * se,
+                   ci_ub = smpl_mean + q * se)
+  ci
+}
+
+set.seed(19811202)
+tmp2 <- rdply(100, smpl_mean_sample_ci(100, 95 / 100))
+tmp2 <- tmp2 %>% 
+  mutate(n = seq_len(100), 
+         contains_mean = ((0 > ci_lb) & (0 < ci_ub)))
+
+ggplot(tmp2, aes(x = n, ymin = ci_lb, ymax = ci_ub, colour = contains_mean)) + 
+  geom_linerange(size = 1.2) + geom_hline(yintercept = 0, colour = "blue", linetype = "dashed", size = 0.5) + 
+  scale_x_continuous("# of samples") + 
+  scale_y_continuous(sprintf("%d%% Confidence interval", 95)) + 
+  scale_colour_manual(values = c("red", "black")) + 
+  annotate("text", x = 70, y = -0.5, label = sprintf("# of intervals containing true mean: %d", sum(tmp2$contains_mean)), hjust = 0) + 
+  annotate("text", x = 70, y = -0.55, label = sprintf("# of intervals NOT containing true mean: %d", sum(!tmp2$contains_mean)), hjust = 0) + 
+  theme(legend.position = "none",
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
+
+
+# Clinical Research
 
 ## Overview 
 
