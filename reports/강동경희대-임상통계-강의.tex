@@ -80,6 +80,7 @@
 \usepackage{bm}
 \usepackage{booktabs}
 \usepackage{dcolumn}
+\usepackage{multirow}
 \usepackage{array}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage{gensymb}
@@ -562,29 +563,276 @@ Again, data are the small aspect of the real world.
 Statistical inference provides us more reasonable interpretation
 regarding to the uncertainty of data.
 
-\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Two main category of statistical inference}]
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Two main aspects of statistical inference}]
 \begin{itemize}
+\tightlist
   \item \textbf{Estimation}
+  \begin{itemize}
+  \tightlist
+    \item Point estimation
+    \item \textbf{Interval estimation}
+  \end{itemize}
   \item \textbf{Hypothesis testing}
 \end{itemize}
 \end{tcolorbox}
 
 \end{frame}
 
-\begin{frame}{Meaning of 95\% confidence interval}
+\begin{frame}{Estimation}
 
-\begin{figure}[H]
+\begin{block}{Point estimation}
 
-{\centering \includegraphics[width=10cm,height=5cm]{Figures/unnamed-chunk-1-1} 
+\begin{itemize}
+\tightlist
+\item
+  Simply using sample statistic (e.g., sample mean, proportion and
+  standard deviation)
+\item
+  Good estimate: unbiased (to target) and have small variance (be
+  precise)
+\end{itemize}
 
-}
+\begin{center}
+  \includegraphics[width = 7cm, height = 2cm]{bias.png}
+\end{center}
 
-\caption{95\% confidence intervals for 100 independent drawn samples with $n = 100$.}\label{fig:unnamed-chunk-1}
-\end{figure}
+\begin{itemize}
+\tightlist
+\item
+  Disadvantages
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No way to validate whether our estimate is good or bad
+  \item
+    Example: if someone shows an estimate and it was taken from only one
+    sample, can you trust the value of estimate?
+  \end{itemize}
+\end{itemize}
+
+\end{block}
 
 \end{frame}
 
-\section{Clinical Research}\label{clinical-research}
+\begin{frame}{Estimation}
+
+\begin{block}{Interval estimation}
+
+\begin{itemize}
+\tightlist
+\item
+  Almost all point estimates are wrong
+\item
+  Quantifying the uncertainty in the estimate \(\rightarrow\)
+  \textbf{standard error}
+\item
+  Plus the concept of belief or probability that the parameter can be
+  expected to be lie within an interval \(\rightarrow\) \((1-\alpha)\)\%
+  confidence interval
+\item
+  \((1-\alpha)\) is called as \textbf{confidence level}, representing
+  the magnitude of our belief
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Estimation}
+
+\begin{block}{\((1-\alpha)\)\% confidence interval}
+
+\begin{itemize}
+\tightlist
+\item
+  General form of \((1-\alpha)\)\% confidence interval for population
+  mean \(\mu\)
+\end{itemize}
+
+\[
+  \hat{\theta} \pm \Phi^{-1}(\alpha /2)\frac{\sigma}{\sqrt{n}}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\theta}\): a point estimator
+\item
+  \(\Phi^{-1}(\alpha /2)\): inverse of cumulative density function
+  \(\Phi\) at the \(\alpha /2\)\textsuperscript{th} percentile
+\end{itemize}
+
+\end{block}
+
+\begin{block}{Interpretation}
+
+\begin{itemize}
+\tightlist
+\item
+  모수가 이 구간에 포함될 확률이 95\%? \(\rightarrow\) WRONG!!
+\item
+  모든 가능한 모수에 대한 표본 추정치의 신뢰구간들 중 95\%가 모수
+  \(\theta\)를 포함 \(\rightarrow\) OK!!
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Simulation result of 95\% confidence interval of
+\(\mathbf{\mu}\)}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=10cm,height=5cm]{Figures/sim-95CI-1} 
+
+}
+
+\caption{95\% confidence intervals for 100 independent drawn samples with $n = 100$.}\label{fig:sim-95CI}
+\end{figure}
+
+\begin{mdframed}[backgroundcolor = gray!30]
+동일한 방법으로 100번 $n$개의 표본을 추출했을 때 구한 신뢰구간 중 95개 정도의 신뢰구간이 $\mu$를 포함
+\end{mdframed}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{mdframed}[backgroundcolor = gray!30]
+표본으로부터 얻은 정보를 토대로 모집단에 대한 특정 가설을 받아들이거나(accept) 혹은 기각(reject)을 위한 통계적 의사결정 방법
+\end{mdframed}
+
+\begin{itemize}
+\tightlist
+\item
+  대한민국 40대 남성의 평균 수축기 혈압은 125 mmHg 이다
+\item
+  농촌과 도시지역의 치매 유병률은 다르다
+\item
+  소화불량 환자의 변증별 복압도는 다르다
+\end{itemize}
+
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{통계적 가설의 유형}]
+  \begin{itemize}
+    \item \textbf{귀무가설(null hypothesis)} denoted as $\bm{\mathrm{H}_{0}}$
+    \item \textbf{대립가설(alternative hypothesis)} denoted as $\bm{\mathrm{H}_{1}}$
+  \end{itemize}
+\end{tcolorbox}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{block}{귀무가설}
+
+\begin{itemize}
+\tightlist
+\item
+  기존에 알려진 사실 또는 비교 대상과 차이 없음으로 설정
+\item
+  \(\mathrm{H}_{0}: \mu = a\), \(\mathrm{H}_{0}: \mu_{1} = \mu_{2}\)
+\end{itemize}
+
+\end{block}
+
+\begin{block}{대립가설}
+
+\begin{itemize}
+\tightlist
+\item
+  새로운 사실, 현재 믿음에 대한 변화 또는 연구자가 입증하고 싶어하는
+  가설로 설정
+\item
+  \(\mathrm{H}_{1}: \mu > a\), \(\mathrm{H}_{1}: \mu < a\),
+  \(\mathrm{H}_{1}: \mu \neq a\),
+  \(\mathrm{H}_{1}: \mu_{1} \neq \mu_{2}\)
+\end{itemize}
+
+\textbf{보수적 의사결정방법(conservative decision making rule)}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{block}{Two types of error in hypothesis testing}
+
+가설 검정은 다음 두 가지 오류를 반드시 수반
+
+\begin{itemize}
+\tightlist
+\item
+  1종 오류(type I error): \(\mathrm{H}_{0}\)이 참(true)임에도 불구하고
+  \(\mathrm{H}_{0}\)를 기각(\(\mathrm{H}_{1}\) 채택)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    일반적으로 \(\alpha\)로 표기:
+    \(P(\mathrm{reject~H_{0}} | \mathrm{true ~ H_{0}})\)
+  \item
+    False positive rate (FPR)
+  \item
+    1종 오류 발생확률의 허용수준: 유의수준(significance level
+    \(\alpha\))
+  \end{itemize}
+\item
+  2종 오류(type II error): \(\mathrm{H}_{0}\)이 거짓(false)일 때
+  \(\mathrm{H}_{0}\)를 채택(\(\mathrm{H}_{1}\) 기각)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\beta\)로 표기:
+    \(P(\mathrm{reject~H_{1}} | \mathrm{true ~ H_{1}})\)
+  \item
+    False negative rate (FNR)
+  \item
+    검정력: \(1-\beta\)
+  \end{itemize}
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{table}
+  \centering
+  \caption{Types of errors in hypothesis testing}
+  \begingroup\footnotesize
+  \begin{tabular}{cccc}
+  \toprule
+                              &                         & \multicolumn{2}{c}{\textbf{True state}} \\ \cmidrule(l){3-4}
+                              &                         & True $\mathrm{H}_{0}$    & True $\mathrm{H}_{1}$ \\
+  \midrule
+  \textbf{Test result}       & Accept $\mathrm{H}_{0}$  & Correct ($1-\alpha$)     & Type II error ($\beta$)\\
+                             & Accept $\mathrm{H}_{1}$  & Type I error ($\alpha$)  &  Correct ($1-\beta$) \\
+  \bottomrule                  
+  \end{tabular}
+  \endgroup
+\end{table}
+
+어떻게 하면 1종 오류와 2종 오류를 동시에 줄일 수 있을까?
+
+\begin{itemize}
+\tightlist
+\item
+  \(\alpha\) \(\uparrow\) \(\rightarrow\) \(\beta\) \(\downarrow\)
+\item
+  \(\beta\) \(\downarrow\) \(\rightarrow\) \(\alpha\) \(\uparrow\)
+\item
+  주어진 상황에서 두 오류를 동시에 줄이는 것은 불가능
+\end{itemize}
+
+\end{frame}
+
+\section{Chapter II: Clinical
+Research}\label{chapter-ii-clinical-research}
 
 \begin{frame}{Overview}
 

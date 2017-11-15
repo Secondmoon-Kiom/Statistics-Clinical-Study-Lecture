@@ -18,6 +18,8 @@ urlcolor: blue
 classoption: xcolor=dvipsnames
 fontsize: 9pt
 geometry: paperwidth=297mm, paperheight=210mm, textwidth=247mm, textheight=154.6mm
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -282,7 +284,7 @@ tableContinuous(vars = df, stats = c("n", "min", "q1", "median", "mean", "q3", "
 
 ### Example of data visualization
 
-```{r mpg-example, message = F, fig.pos = "H", fig.width = 11, fig.height = 9, out.width = "8cm", out.height = "6cm", dpi = 250,  fig.align = "center", fig.cap = "Data visualization examples for ``mpg'' dataset. All plots are available at http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html"}
+```{r mpg-example, message = F, fig.pos = "H", fig.width = 11, fig.height = 9, out.width = "8cm", out.height = "6cm", dpi = 250,  fig.align = "center", fig.cap = "Data visualization examples for ``mpg'' dataset. All plots are available at http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html", cache = T}
 theme_set(theme_classic())
 g <- ggplot(mpg, aes(cty))
 g1 <- g + geom_density(aes(fill=factor(cyl)), alpha=0.8) + 
@@ -338,17 +340,72 @@ Again, data are the small aspect of the real world.
 
 Statistical inference provides us more reasonable interpretation regarding to the uncertainty of data.
 
-\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Two main category of statistical inference}]
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Two main aspects of statistical inference}]
 \begin{itemize}
+\tightlist
   \item \textbf{Estimation}
+  \begin{itemize}
+  \tightlist
+    \item Point estimation
+    \item \textbf{Interval estimation}
+  \end{itemize}
   \item \textbf{Hypothesis testing}
 \end{itemize}
 \end{tcolorbox}
 
+<!-- : difficult to figure out whether the estimate is good or bad -->
+<!-- : quantifying the uncertainty in the estimate (HOW?) -->
+ <!-- \begin{itemize} -->
+ <!--  \tightlist -->
+ <!--    \item Making a decision about the population parameter based on the knowledge of the sample estimate -->
+ <!--  \end{itemize} -->
 
-## Meaning of 95\% confidence interval 
+## Estimation
 
-```{r sim-95CI, message = F, fig.pos = "H", fig.width = 10, fig.height = 5, out.width = "10cm", out.height = "5cm", dpi = 250, fig.align = "center", fig.cap = "95\\% confidence intervals for 100 independent drawn samples with $n = 100$."}
+### Point estimation
+
+- Simply using sample statistic (e.g., sample mean, proportion and standard deviation)
+- Good estimate: unbiased (to target) and have small variance (be precise)
+
+\begin{center}
+  \includegraphics[width = 7cm, height = 2cm]{bias.png}
+\end{center}
+
+- Disadvantages
+    - No way to validate whether our estimate is good or bad
+    - Example: if someone shows an estimate and it was taken from only one sample, can you trust the value of estimate? 
+
+## Estimation
+
+### Interval estimation
+
+- Almost all point estimates are wrong
+- Quantifying the uncertainty in the estimate $\rightarrow$ \textbf{standard error}
+- Plus the concept of belief or probability that the parameter can be expected to be lie within an interval $\rightarrow$ $(1-\alpha)$\% confidence interval
+- $(1-\alpha)$ is called as \textbf{confidence level}, representing the magnitude of our belief
+
+## Estimation
+
+### $(1-\alpha)$\% confidence interval
+
+- General form of $(1-\alpha)$\% confidence interval for population mean $\mu$
+
+$$
+  \hat{\theta} \pm \Phi^{-1}(\alpha /2)\frac{\sigma}{\sqrt{n}}
+$$
+
+- $\hat{\theta}$: a point estimator
+- $\Phi^{-1}(\alpha /2)$: inverse of cumulative density function $\Phi$ at the $\alpha /2$\textsuperscript{th} percentile
+
+### Interpretation
+
+<!-- - A shorter interval is better under the equal confidence level $\rightarrow$ increasing $n$ -->
+- 모수가 이 구간에 포함될 확률이 95\%? $\rightarrow$ WRONG!!
+- 모든 가능한 모수에 대한 표본 추정치의 신뢰구간들 중 95\%가 모수 $\theta$를 포함 $\rightarrow$ OK!!
+    
+## Simulation result of 95\% confidence interval of $\mathbf{\mu}$
+
+```{r sim-95CI, message = F, fig.pos = "H", fig.width = 10, fig.height = 5, out.width = "10cm", out.height = "5cm", dpi = 250, fig.align = "center", fig.cap = "95\\% confidence intervals for 100 independent drawn samples with $n = 100$.", cache = T}
 smpl_mean_sample_ci <- function(n, p=0.95, pop_mean=0, pop_sd=1) {
   smpl <- rnorm(n, pop_mean, pop_sd)
   smpl_sd <- sd(smpl)
@@ -379,8 +436,84 @@ ggplot(tmp2, aes(x = n, ymin = ci_lb, ymax = ci_ub, colour = contains_mean)) +
         axis.ticks.y = element_blank())
 ```
 
+\begin{mdframed}[backgroundcolor = gray!30]
+동일한 방법으로 100번 $n$개의 표본을 추출했을 때 구한 신뢰구간 중 95개 정도의 신뢰구간이 $\mu$를 포함
+\end{mdframed}
 
-# Clinical Research
+## Hypothesis testing
+
+\begin{mdframed}[backgroundcolor = gray!30]
+표본으로부터 얻은 정보를 토대로 모집단에 대한 특정 가설을 받아들이거나(accept) 혹은 기각(reject)을 위한 통계적 의사결정 방법
+\end{mdframed}
+
+  - 대한민국 40대 남성의 평균 수축기 혈압은 125 mmHg 이다
+  - 농촌과 도시지역의 치매 유병률은 다르다
+  - 소화불량 환자의 변증별 복압도는 다르다
+  
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{통계적 가설의 유형}]
+  \begin{itemize}
+    \item \textbf{귀무가설(null hypothesis)} denoted as $\bm{\mathrm{H}_{0}}$
+    \item \textbf{대립가설(alternative hypothesis)} denoted as $\bm{\mathrm{H}_{1}}$
+  \end{itemize}
+\end{tcolorbox}
+
+## Hypothesis testing
+
+### 귀무가설
+
+- 기존에 알려진 사실 또는 비교 대상과 차이 없음으로 설정
+- $\mathrm{H}_{0}: \mu = a$, $\mathrm{H}_{0}: \mu_{1} = \mu_{2}$
+
+### 대립가설
+
+- 새로운 사실, 현재 믿음에 대한 변화 또는 연구자가 입증하고 싶어하는 가설로 설정
+- $\mathrm{H}_{1}: \mu > a$, $\mathrm{H}_{1}: \mu < a$, $\mathrm{H}_{1}: \mu \neq a$, $\mathrm{H}_{1}: \mu_{1} \neq \mu_{2}$
+
+\textbf{보수적 의사결정방법(conservative decision making rule)}
+
+## Hypothesis testing
+
+### Two types of error in hypothesis testing
+
+가설 검정은 다음 두 가지 오류를 반드시 수반
+
+- 1종 오류(type I error): $\mathrm{H}_{0}$이 참(true)임에도 불구하고 $\mathrm{H}_{0}$를 기각($\mathrm{H}_{1}$ 채택)
+    - 일반적으로 $\alpha$로 표기: $P(\mathrm{reject~H_{0}} | \mathrm{true ~ H_{0}})$
+    - False positive rate (FPR)
+    - 1종 오류 발생확률의 허용수준: 유의수준(significance level $\alpha$)
+    
+- 2종 오류(type II error): $\mathrm{H}_{0}$이 거짓(false)일 때  $\mathrm{H}_{0}$를 채택($\mathrm{H}_{1}$ 기각)
+    - $\beta$로 표기: $P(\mathrm{reject~H_{1}} | \mathrm{true ~ H_{1}})$
+    - False negative rate (FNR)
+    - 검정력: $1-\beta$
+    
+## Hypothesis testing
+
+
+
+\begin{table}
+  \centering
+  \caption{Types of errors in hypothesis testing}
+  \begingroup\footnotesize
+  \begin{tabular}{cccc}
+  \toprule
+                              &                         & \multicolumn{2}{c}{\textbf{True state}} \\ \cmidrule(l){3-4}
+                              &                         & True $\mathrm{H}_{0}$    & True $\mathrm{H}_{1}$ \\
+  \midrule
+  \textbf{Test result}       & Accept $\mathrm{H}_{0}$  & Correct ($1-\alpha$)     & Type II error ($\beta$)\\
+                             & Accept $\mathrm{H}_{1}$  & Type I error ($\alpha$)  &  Correct ($1-\beta$) \\
+  \bottomrule                  
+  \end{tabular}
+  \endgroup
+\end{table}
+
+어떻게 하면 1종 오류와 2종 오류를 동시에 줄일 수 있을까? 
+
+- $\alpha$ $\uparrow$ $\rightarrow$ $\beta$ $\downarrow$
+- $\beta$ $\downarrow$ $\rightarrow$ $\alpha$ $\uparrow$
+- 주어진 상황에서 두 오류를 동시에 줄이는 것은 불가능
+
+# Chapter II: Clinical Research
 
 ## Overview 
 
