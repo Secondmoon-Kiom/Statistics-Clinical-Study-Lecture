@@ -831,6 +831,45 @@ regarding to the uncertainty of data.
 
 \end{frame}
 
+\begin{frame}[fragile]{Hypothesis testing}
+
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: blood pressure cutpoint}]
+  \scriptsize  최근 미국의 심장협회(AHA)와 심장병학(ACC)가 고혈압의 기준을 수축기 혈압 140/80 mmHg에서 130/80 mmHg로 하향 조정한다는 내용을 현지 매체들이 보도했다. 새 기준으로 변경한 경우 정상으로 판명된 사람이 고혈압으로 진단되는 비율을 알기 위해 정상인과 과거 고혈압으로 진단 받은 환자 각각 50명 씩 표집했다. 그 결과 정상으로 판명된 사람들의 수축기 혈압 평균은 123 mmHg이고 표준편차는 7 mmHg로 조사되었으며, 고혈압으로 진단받았던 환자의 수축기 혈압 평균은 147 mmHg이고 표준편차는 10 mmHg로 조사되었다. 두 집단의 분포는 정규분포를 따른다고 알려져 있다. 
+\end{tcolorbox}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=10cm,height=4cm]{Figures/dist-2-1} 
+
+}
+
+\caption{Distribution of normal and hypertention groups}\label{fig:dist-2}
+\end{figure}
+
+\begin{verbatim}
+## List of 1
+##  $ axis.title.y: list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  - attr(*, "class")= chr [1:2] "theme" "gg"
+##  - attr(*, "complete")= logi FALSE
+##  - attr(*, "validate")= logi TRUE
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+정상인 중 과거 수축기 혈압 기준으로 고혈압군을 나눌 때 정상임에도
+불구하고 고혈압 환자로 판정할 확률
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(X \geq 140 | \mu = 123) = P((X - \mu)/(\sigma/\sqrt{n}) \geq (140-123)/(7/\sqrt{50})) = P(Z \geq 17.18) \approx 0\)
+\end{itemize}
+
+\end{frame}
+
 \section{Chapter II: Clinical
 Research}\label{chapter-ii-clinical-research}
 
