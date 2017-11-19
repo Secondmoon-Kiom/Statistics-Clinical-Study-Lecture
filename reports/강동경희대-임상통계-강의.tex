@@ -809,7 +809,7 @@ regarding to the uncertainty of data.
   \toprule
                               &                         & \multicolumn{2}{c}{\textbf{True state}} \\ \cmidrule(l){3-4}
                               &                         & True $\mathrm{H}_{0}$    & True $\mathrm{H}_{1}$ \\
-  \midrule
+  \midrule  
   \textbf{Test result}       & Accept $\mathrm{H}_{0}$  & Correct ($1-\alpha$)     & Type II error ($\beta$)\\
                              & Accept $\mathrm{H}_{1}$  & Type I error ($\alpha$)  &  Correct ($1-\beta$) \\
   \bottomrule                  
@@ -831,10 +831,10 @@ regarding to the uncertainty of data.
 
 \end{frame}
 
-\begin{frame}[fragile]{Hypothesis testing}
+\begin{frame}{Hypothesis testing}
 
 \begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: blood pressure cutpoint}]
-  \scriptsize  최근 미국의 심장협회(AHA)와 심장병학(ACC)가 고혈압의 기준을 수축기 혈압 140/80 mmHg에서 130/80 mmHg로 하향 조정한다는 내용을 현지 매체들이 보도했다. 새 기준으로 변경한 경우 정상으로 판명된 사람이 고혈압으로 진단되는 비율을 알기 위해 정상인과 과거 고혈압으로 진단 받은 환자 각각 50명 씩 표집했다. 그 결과 정상으로 판명된 사람들의 수축기 혈압 평균은 123 mmHg이고 표준편차는 7 mmHg로 조사되었으며, 고혈압으로 진단받았던 환자의 수축기 혈압 평균은 147 mmHg이고 표준편차는 10 mmHg로 조사되었다. 두 집단의 분포는 정규분포를 따른다고 알려져 있다. 
+  \scriptsize  최근 미국의 심장협회(AHA)와 심장병학(ACC)가 고혈압의 기준을 수축기 혈압 140/80 mmHg에서 130/80 mmHg로 하향 조정한다는 내용을 현지 매체들이 보도했다. 정상으로 판정된 사람들의 수축기 혈압의 분포는 $\mu=123$ mmHg, $\sigma=7$ mmHg인 정규분포를 따르고, 고혈압으로 진단받은 환자의 수축기 혈압은  $\mu=147$ mmHg, $\sigma=10$ mmHg인 정규분포를 따른다. 
 \end{tcolorbox}
 
 \begin{figure}[H]
@@ -846,244 +846,120 @@ regarding to the uncertainty of data.
 \caption{Distribution of normal and hypertention groups}\label{fig:dist-2}
 \end{figure}
 
-\begin{verbatim}
-## List of 1
-##  $ axis.title.y: list()
-##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-##  - attr(*, "class")= chr [1:2] "theme" "gg"
-##  - attr(*, "complete")= logi FALSE
-##  - attr(*, "validate")= logi TRUE
-\end{verbatim}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  정상인 중 과거 수축기 혈압 기준으로 고혈압군을 나눌 때 정상임에도
+  불구하고 고혈압 환자로 판정할 확률
+\end{enumerate}
+
+\(P(X \geq 140 | \mu = 123, \sigma = 7) = P((X - \mu)/\sigma \geq (140-123)/7) = P(Z \geq 2.43) \approx 0.008\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  정상인 중 최근 변경 수축기 혈압 기준으로 고혈압군을 나눌 때 정상임에도
+  불구하고 고혈압 환자로 판정할 확률
+\end{enumerate}
+
+\(P(X \geq 130 | \mu = 123, \sigma = 7) = P(Z \geq 1) = 0.159\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  고혈압 환자 중 과거 수축기 혈압 기준으로 고혈압을 구분할 때 고혈압인데
+  정상으로 판정할 확률
+\end{enumerate}
+
+\(P(X \leq 140 | \mu = 147, \sigma = 5) = P(Z \leq 1.4) = 0.081\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  고혈압 환자 중 최근 수축기 혈압 기준으로 고혈압을 구분할 때 고혈압인데
+  정상으로 판정할 확률
+\end{enumerate}
+
+\(P(X \leq 130 | \mu = 147, \sigma = 5) = P(Z \leq -3.4) = 0.0003\)
 
 \end{frame}
 
 \begin{frame}{Hypothesis testing}
 
-정상인 중 과거 수축기 혈압 기준으로 고혈압군을 나눌 때 정상임에도
-불구하고 고혈압 환자로 판정할 확률
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: New drugs for ALS}]
+  \scriptsize  
+  현재까지 근위축측삭경화증(amyotrophic lateral sclerosis, ALS)의 치료약으로 승인 받은 약품은 Riluzole이 유일하다. 최근 모 대학에서는 ALS의 진행속도를 줄일 수 있는 한방혼합약제를 개발했고 해당 약의 유효성을 평가하기 위한 임상시험(Riluzole 군 30명, 신약군 30명)을 실시했다. 약효의 평가변수는 ALS 증상점수(ALSFRS)의 기저치 대비 6개월 후 변화량이다. 임상시험 결과, Riluzole 투여 시 기저치 대비 6개월 후 ALSFRS의 평균 변화량은 -7.2점이고 그 표준편차는 5.2로 나타났고, 신약의 기저치 대비  6개월 후 ALS의 변화량은 -3.5점, 표준편차는 2.5로 나타났다. 
+\end{tcolorbox}
+
+\begin{block}{가설 설정}
+
+\begin{eqnarray}
+\mathrm{H}_{0} &:& \mu_{\mathrm{riluzole}} = \mu_{\mathrm{new}} \notag \\ 
+\mathrm{H}_{1} &:& \mu_{\mathrm{riluzole}} < \mu_{\mathrm{new}} \notag
+\end{eqnarray}
+
+\end{block}
+
+\begin{block}{Test statistics}
+
+\[
+  T = \frac{\bar{X}_{new} - \bar{X}_{riluzole}}{S_{p}\sqrt{1/n + 1/m}} \sim t_{(n+m-2), \alpha}
+\]
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: New drugs for ALS}]
+  \scriptsize  
+  현재까지 근위축측삭경화증(amyotrophic lateral sclerosis, ALS)의 치료약으로 승인 받은 약품은 Riluzole이 유일하다. 최근 모 대학에서는 ALS의 진행속도를 줄일 수 있는 한방혼합약제를 개발했고 해당 약의 유효성을 평가하기 위한 임상시험(Riluzole 군 30명, 신약군 30명)을 실시했다. 약효의 평가변수는 ALS 증상점수(ALSFRS)의 기저치 대비 6개월 후 변화량이다. 임상시험 결과, Riluzole 투여 시 기저치 대비 6개월 후 ALSFRS의 평균 변화량은 -7.2점이고 그 표준편차는 5.2로 나타났고, 신약의 기저치 대비  6개월 후 ALS의 변화량은 -3.5점, 표준편차는 2.5로 나타났다. 
+\end{tcolorbox}
+
+\(S_{p}\): pooled standard deviation; \(n=m=30\)
+
+\[
+  S_{p} = \sqrt{\frac{(n-1)s^{2}_{new} + (m-1)s^{2}_{riluzole}}{m+n-2}}
+\]
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+\begin{block}{P-values}
 
 \begin{itemize}
 \tightlist
 \item
-  \(P(X \geq 140 | \mu = 123) = P((X - \mu)/(\sigma/\sqrt{n}) \geq (140-123)/(7/\sqrt{50})) = P(Z \geq 17.18) \approx 0\)
+  p값(유의확률 : significant probability)은 정확한 유의수준(exact level
+  of significance)이라고도 함.
+\item
+  귀무가설이 참이라는 검정통계량을 바탕으로 귀무가설을 기각하였을 때
+  실제로 제 1종 오류(차이가 없는데 차이가 있다는 결론을 내릴 오류)를
+  범할 최대 확률
+\item
+  p값을 이용한 가설검정의 판정
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\mathrm{p-value} < \alpha\) → 귀무가설(H0) 기각
+  \item
+    \(\mathrm{p-value} \geq \alpha\) → 귀무가설(H0) 채택
+  \end{itemize}
 \end{itemize}
-
-\end{frame}
-
-\section{Chapter II: Clinical
-Research}\label{chapter-ii-clinical-research}
-
-\begin{frame}{Overview}
-
-\LARGE{\textbf{Research or trial?}}
-
-\begin{block}{Research}
-
-\normalsize{자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험}
-
-\end{block}
-
-\begin{block}{Trial}
-
-\normalsize{자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험}
-
-\end{block}
-
-\end{frame}
-
-\begin{frame}{Observational Study}
-
-\begin{block}{Cross-sectional study (단면적 관찰연구)}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  prevalence study
-\item
-  Diagostic test
-\item
-  Ecological study
-\item
-  Validity, Reliability, and agreement study
-\end{enumerate}
-
-\end{block}
-
-\begin{block}{Longitudinal study (종단적 관찰연구)}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Prospective study
-\item
-  Retrospective study
-\end{enumerate}
-
-\end{block}
-
-\end{frame}
-
-\begin{frame}{Experimental Study}
-
-\begin{block}{Randomized controlled trial}
-
-\end{block}
-
-\begin{block}{Pilot study}
-
-\end{block}
-
-\begin{block}{Exploratory study}
-
-\end{block}
-
-\begin{block}{Confirmative study}
-
-\end{block}
-
-\end{frame}
-
-\section{Type of outcome variables}\label{type-of-outcome-variables}
-
-\begin{frame}{Primary outcomes}
-
-\end{frame}
-
-\begin{frame}{Secondary outcomes}
-
-\end{frame}
-
-\begin{frame}{Surrogate variables}
-
-\end{frame}
-
-\begin{frame}{Global assessment variable}
-
-\end{frame}
-
-\section{Sample size calculation}\label{sample-size-calculation}
-
-\begin{frame}{Overview}
-
-\begin{block}{Two approaches}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Based on the marginal error rate \(\rightarrow\) population based
-  observational study
-\item
-  Based on the effectiveness between concerning groups \(\rightarrow\)
-  experimental study
-\end{enumerate}
-
-\textbf{Both approaches are based on previous studies}
-
-\textbf{Is your study entirely new?}
-
-\end{block}
-
-\end{frame}
-
-\begin{frame}{Observational study}
-
-\end{frame}
-
-\begin{frame}{Observational study: prevalence study}
-
-\end{frame}
-
-\begin{frame}{Observational study: prevalence study}
-
-\end{frame}
-
-\begin{frame}{Parallel design}
-
-\end{frame}
-
-\begin{frame}{\(2\times 2\) cross-over design}
-
-\end{frame}
-
-\begin{frame}{Factorial design}
-
-\end{frame}
-
-\section{Multiple comparison}\label{multiple-comparison}
-
-\begin{frame}{What makes data significant?}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Data themselves contain unexpected errors
-\item
-  Bias
-\item
-  Just conincidence
-\item
-  Our hypothesis is working
-\end{enumerate}
-
-\end{frame}
-
-\begin{frame}{Torturing data}
-
-\end{frame}
-
-\section{Statistical Analysis}\label{statistical-analysis}
-
-\begin{frame}{Overview}
-
-\end{frame}
-
-\begin{frame}{Independent two sample t-test}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Too easy, but very useful methodology for the comparison of sample
-  means between two groups
-\end{enumerate}
-
-\end{frame}
-
-\begin{frame}{Analysis of Variance (ANOVA)}
-
-\end{frame}
-
-\begin{frame}{Analysis of Covariance (ANCOVA)}
-
-\end{frame}
-
-\begin{frame}{Simple or multiple regression}
-
-\end{frame}
-
-\begin{frame}{Repeated Measures ANOVA}
-
-\end{frame}
-
-\begin{frame}{Linear mixed effects model}
-
-\end{frame}
-
-\begin{frame}{Reliability analysis}
-
-\begin{block}{Cohen's \(\kappa\)}
-
-\end{block}
-
-\begin{block}{Cronbach's \(\alpha\)}
-
-\end{block}
-
-\begin{block}{Intra Class Correlation (ICC)}
 
 \end{block}
 

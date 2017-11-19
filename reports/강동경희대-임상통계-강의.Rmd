@@ -499,7 +499,7 @@ ggplot(tmp2, aes(x = n, ymin = ci_lb, ymax = ci_ub, colour = contains_mean)) +
   \toprule
                               &                         & \multicolumn{2}{c}{\textbf{True state}} \\ \cmidrule(l){3-4}
                               &                         & True $\mathrm{H}_{0}$    & True $\mathrm{H}_{1}$ \\
-  \midrule
+  \midrule  
   \textbf{Test result}       & Accept $\mathrm{H}_{0}$  & Correct ($1-\alpha$)     & Type II error ($\beta$)\\
                              & Accept $\mathrm{H}_{1}$  & Type I error ($\alpha$)  &  Correct ($1-\beta$) \\
   \bottomrule                  
@@ -516,7 +516,7 @@ ggplot(tmp2, aes(x = n, ymin = ci_lb, ymax = ci_ub, colour = contains_mean)) +
 ## Hypothesis testing
 
 \begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: blood pressure cutpoint}]
-  \scriptsize  최근 미국의 심장협회(AHA)와 심장병학(ACC)가 고혈압의 기준을 수축기 혈압 140/80 mmHg에서 130/80 mmHg로 하향 조정한다는 내용을 현지 매체들이 보도했다. 새 기준으로 변경한 경우 정상으로 판명된 사람이 고혈압으로 진단되는 비율을 알기 위해 정상인과 과거 고혈압으로 진단 받은 환자 각각 50명 씩 표집했다. 그 결과 정상으로 판명된 사람들의 수축기 혈압 평균은 123 mmHg이고 표준편차는 7 mmHg로 조사되었으며, 고혈압으로 진단받았던 환자의 수축기 혈압 평균은 147 mmHg이고 표준편차는 10 mmHg로 조사되었다. 두 집단의 분포는 정규분포를 따른다고 알려져 있다. 
+  \scriptsize  최근 미국의 심장협회(AHA)와 심장병학(ACC)가 고혈압의 기준을 수축기 혈압 140/80 mmHg에서 130/80 mmHg로 하향 조정한다는 내용을 현지 매체들이 보도했다. 정상으로 판정된 사람들의 수축기 혈압의 분포는 $\mu=123$ mmHg, $\sigma=7$ mmHg인 정규분포를 따르고, 고혈압으로 진단받은 환자의 수축기 혈압은  $\mu=147$ mmHg, $\sigma=10$ mmHg인 정규분포를 따른다. 
 \end{tcolorbox}
 
 ```{r dist-2, message = F, fig.pos = "H", fig.width = 10, fig.height = 5, out.width = "10cm", out.height = "4cm", dpi = 250, fig.align = "center", fig.cap = "Distribution of normal and hypertention groups", cache = F}
@@ -545,7 +545,7 @@ ggplot(data = xvalues) + aes(x = xvalues) + stat_function(fun = normal, size = 1
   geom_vline(xintercept = 130, linetype = "dashed", size = 1, colour = "blue") + 
   annotate("text", x = 125, y = 0.06, label = "Normal", hjust = 0) + 
   annotate("text", x = 150, y = 0.078, label = "Hypertention", hjust = 0, color = "red") + 
-  theme_base() + xlab("Systolic BP (mmHg)")
+  theme_base() + xlab("Systolic BP (mmHg)") + 
   theme(axis.title.y = element_blank())
 
 ```
@@ -554,123 +554,187 @@ ggplot(data = xvalues) + aes(x = xvalues) + stat_function(fun = normal, size = 1
 
 1. 정상인 중 과거 수축기 혈압 기준으로 고혈압군을 나눌 때 정상임에도 불구하고 고혈압 환자로 판정할 확률
 
-$P(X \geq 140 | \mu = 123) = P((X - \mu)/(\sigma/\sqrt{n}) \geq (140-123)/(7/\sqrt{50})) = P(Z \geq 17.18) \approx 0$
+$P(X \geq 140 | \mu = 123, \sigma = 7) = P((X - \mu)/\sigma \geq (140-123)/7) = P(Z \geq 2.43) \approx 0.008$
 
 2. 정상인 중 최근 변경 수축기 혈압 기준으로 고혈압군을 나눌 때 정상임에도 불구하고 고혈압 환자로 판정할 확률
 
-$P(X \geq 130) | \mu = 123) = P(Z \geq $
+$P(X \geq 130 | \mu = 123, \sigma = 7) = P(Z \geq 1) = 0.159$
+
+3. 고혈압 환자 중 과거 수축기 혈압 기준으로 고혈압을 구분할 때 고혈압인데 정상으로 판정할 확률
+
+$P(X \leq 140 | \mu = 147, \sigma = 5) = P(Z \leq 1.4) = 0.081$
+
+4. 고혈압 환자 중 최근 수축기 혈압 기준으로 고혈압을 구분할 때 고혈압인데 정상으로 판정할 확률
+
+$P(X \leq 130 | \mu = 147, \sigma = 5) = P(Z \leq -3.4) = 0.0003$
 
 
-# Chapter II: Clinical Research
+## Hypothesis testing
 
-## Overview 
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: New drugs for ALS}]
+  \scriptsize  
+  현재까지 근위축측삭경화증(amyotrophic lateral sclerosis, ALS)의 치료약으로 승인 받은 약품은 Riluzole이 유일하다. 최근 모 대학에서는 ALS의 진행속도를 줄일 수 있는 한방혼합약제를 개발했고 해당 약의 유효성을 평가하기 위한 임상시험(Riluzole 군 30명, 신약군 30명)을 실시했다. 약효의 평가변수는 ALS 증상점수(ALSFRS)의 기저치 대비 6개월 후 변화량이다. 임상시험 결과, Riluzole 투여 시 기저치 대비 6개월 후 ALSFRS의 평균 변화량은 -7.2점이고 그 표준편차는 5.2로 나타났고, 신약의 기저치 대비  6개월 후 ALS의 변화량은 -3.5점, 표준편차는 2.5로 나타났다. 
+\end{tcolorbox}
 
-\LARGE{\textbf{Research or trial?}}
+### 가설 설정
 
-### Research
+\begin{eqnarray}
+\mathrm{H}_{0} &:& \mu_{\mathrm{riluzole}} = \mu_{\mathrm{new}} \notag \\ 
+\mathrm{H}_{1} &:& \mu_{\mathrm{riluzole}} < \mu_{\mathrm{new}} \notag
+\end{eqnarray}
 
-\normalsize{자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험}
+### Test statistics
 
-### Trial
+$$
+  T = \frac{\bar{X}_{new} - \bar{X}_{riluzole}}{S_{p}\sqrt{1/n + 1/m}} \sim t_{(n+m-2), \alpha}
+$$
 
-\normalsize{자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험}
+## Hypothesis testing
 
-## Observational Study
+\begin{tcolorbox}[colback=gray!10,colframe=black, title=\textbf{Example: New drugs for ALS}]
+  \scriptsize  
+  현재까지 근위축측삭경화증(amyotrophic lateral sclerosis, ALS)의 치료약으로 승인 받은 약품은 Riluzole이 유일하다. 최근 모 대학에서는 ALS의 진행속도를 줄일 수 있는 한방혼합약제를 개발했고 해당 약의 유효성을 평가하기 위한 임상시험(Riluzole 군 30명, 신약군 30명)을 실시했다. 약효의 평가변수는 ALS 증상점수(ALSFRS)의 기저치 대비 6개월 후 변화량이다. 임상시험 결과, Riluzole 투여 시 기저치 대비 6개월 후 ALSFRS의 평균 변화량은 -7.2점이고 그 표준편차는 5.2로 나타났고, 신약의 기저치 대비  6개월 후 ALS의 변화량은 -3.5점, 표준편차는 2.5로 나타났다. 
+\end{tcolorbox}
 
-### Cross-sectional study (단면적 관찰연구)
+$S_{p}$: pooled standard deviation; $n=m=30$
 
-1. prevalence study
-2. Diagostic test
-3. Ecological study 
-4. Validity, Reliability, and agreement study
+$$
+  S_{p} = \sqrt{\frac{(n-1)s^{2}_{new} + (m-1)s^{2}_{riluzole}}{m+n-2}}
+$$
 
-### Longitudinal study (종단적 관찰연구)
+```{r}
+m1 <- -7.5; s1 <- 5.2
+m2 <- -3.5; s2 <- 2.5
+n <- m <- 30
 
-1. Prospective study
-2. Retrospective study
+Sp <- sqrt(((n-1)*s1^2 + (m-1)*s2^2)/(m+n-2))
 
-## Experimental Study
+tt <- (m2 - m1)/(Sp*(1/m + 1/n))
+t0 <- qt(0.05, 58)
 
-### Randomized controlled trial 
-
-### Pilot study
-
-### Exploratory study
-
-### Confirmative study
+```
 
 
-# Type of outcome variables
+## Hypothesis testing 
 
-## Primary outcomes
+### P-values
 
-## Secondary outcomes
+- p값(유의확률 : significant probability)은 정확한 유의수준(exact level of significance)이라고도 함.
+- 귀무가설이 참이라는 검정통계량을 바탕으로 귀무가설을 기각하였을 때 실제로 제 1종 오류(차이가 없는데 차이가 있다는 결론을 내릴 오류)를 범할 최대 확률
+- p값을 이용한 가설검정의 판정
+    - p-value $ < \alpha$ → 귀무가설(H0) 기각
+    - p-value $ \geq \alpha$ → 귀무가설(H0) 채택
 
-## Surrogate variables
+<!-- # Chapter II: Clinical Research -->
 
-## Global assessment variable
+<!-- ## Overview  -->
 
-# Sample size calculation
+<!-- \LARGE{\textbf{Research or trial?}} -->
 
-## Overview
+<!-- ### Research -->
 
-### Two approaches
+<!-- \normalsize{자료의 수집과 분석 목적이 학술적 목적에 국한된 모든 종류의 연구 및 실험} -->
 
-1. Based on the marginal error rate $\rightarrow$ population based observational study
-2. Based on the effectiveness between concerning groups $\rightarrow$ experimental study
-  
-\textbf{Both approaches are based on previous studies}
+<!-- ### Trial -->
 
-\textbf{Is your study entirely new?}
+<!-- \normalsize{자료의 수집과 분석 목적이 이윤추구 또는 허가에 목적이 있는 임상시험} -->
 
-## Observational study
+<!-- ## Observational Study -->
 
-## Observational study: prevalence study
+<!-- ### Cross-sectional study (단면적 관찰연구) -->
 
-## Observational study: prevalence study
+<!-- 1. prevalence stud -->
+<!-- 2. Diagostic test -->
+<!-- 3. Ecological study  -->
+<!-- 4. Validity, Reliability, and agreement study -->
 
-## Parallel design
+<!-- ### Longitudinal study (종단적 관찰연구) -->
 
-## $2\times 2$ cross-over design 
+<!-- 1. Prospective study -->
+<!-- 2. Retrospective study -->
 
-## Factorial design
+<!-- ## Experimental Study -->
 
-# Multiple comparison
+<!-- ### Randomized controlled trial  -->
 
-## What makes data significant?
+<!-- ### Pilot study -->
 
-1. Data themselves contain unexpected errors
-2. Bias
-3. Just conincidence
-4. Our hypothesis is working
+<!-- ### Exploratory study -->
 
-## Torturing data
+<!-- ### Confirmative study -->
 
-# Statistical Analysis 
 
-## Overview
+<!-- # Type of outcome variables -->
 
-## Independent two sample t-test
+<!-- ## Primary outcomes -->
 
-1. Too easy, but very useful methodology for the comparison of sample means between two groups
+<!-- ## Secondary outcomes -->
 
-## Analysis of Variance (ANOVA)
+<!-- ## Surrogate variables -->
 
-## Analysis of Covariance (ANCOVA)
+<!-- ## Global assessment variable -->
 
-## Simple or multiple regression
+<!-- # Sample size calculation -->
 
-## Repeated Measures ANOVA
+<!-- ## Overview -->
 
-## Linear mixed effects model 
+<!-- ### Two approaches -->
 
-## Reliability analysis 
+<!-- 1. Based on the marginal error rate $\rightarrow$ population based observational study -->
+<!-- 2. Based on the effectiveness between concerning groups $\rightarrow$ experimental study -->
 
-### Cohen's $\kappa$
+<!-- \textbf{Both approaches are based on previous studies} -->
 
-### Cronbach's $\alpha$
+<!-- \textbf{Is your study entirely new?} -->
 
-### Intra Class Correlation (ICC)
+<!-- ## Observational study -->
+
+<!-- ## Observational study: prevalence study -->
+
+<!-- ## Observational study: prevalence study -->
+
+<!-- ## Parallel design -->
+
+<!-- ## $2\times 2$ cross-over design  -->
+
+<!-- ## Factorial design -->
+
+<!-- # Multiple comparison -->
+
+<!-- ## What makes data significant? -->
+
+<!-- 1. Data themselves contain unexpected errors -->
+<!-- 2. Bias -->
+<!-- 3. Just conincidence -->
+<!-- 4. Our hypothesis is working -->
+
+<!-- ## Torturing data -->
+
+<!-- # Statistical Analysis  -->
+
+<!-- ## Overview -->
+
+<!-- ## Independent two sample t-test -->
+
+<!-- 1. Too easy, but very useful methodology for the comparison of sample means between two groups -->
+
+<!-- ## Analysis of Variance (ANOVA) -->
+
+<!-- ## Analysis of Covariance (ANCOVA) -->
+
+<!-- ## Simple or multiple regression -->
+
+<!-- ## Repeated Measures ANOVA -->
+
+<!-- ## Linear mixed effects model  -->
+
+<!-- ## Reliability analysis  -->
+
+<!-- ### Cohen's $\kappa$ -->
+
+<!-- ### Cronbach's $\alpha$ -->
+
+<!-- ### Intra Class Correlation (ICC) -->
 
 
 
